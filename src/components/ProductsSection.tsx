@@ -5,7 +5,7 @@ const featuredProducts = [
     id: 1,
     category: "Seeders & Planters",
     name: "Multifunctional Precision Planter",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop&crop=center",
     price: "$12,000 - $18,000",
     description: "Advanced precision planting technology for efficient seeding with customizable row spacing and seed depth control.",
     features: ["GPS Navigation", "Variable Rate Seeding", "Auto Depth Control", "+1 more"]
@@ -14,7 +14,7 @@ const featuredProducts = [
     id: 2,
     category: "Tractors", 
     name: "Agricultural Tractor 85HP",
-    image: "https://images.unsplash.com/photo-1574859888790-a48dde04d2f6?w=600&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1574859888790-a48dde04d2f6?w=600&h=400&fit=crop&crop=center",
     price: "$15,000 - $22,000",
     description: "Reliable and powerful tractor designed for various farming operations with excellent fuel efficiency.",
     features: ["85HP Engine", "4WD", "Hydraulic Lift", "+1 more"]
@@ -23,7 +23,7 @@ const featuredProducts = [
     id: 3,
     category: "Sprayers",
     name: "900 Knapsack Power Sprayer", 
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop&crop=center",
     price: "$800 - $1,200",
     description: "Professional 4-stroke gasoline knapsack sprayer with 900 model designation. High-pressure system for efficient crop protection.",
     features: ["4-Stroke Engine", "High Pressure System", "Ergonomic Design", "Large Tank Capacity"]
@@ -47,14 +47,15 @@ export default function ProductsSection() {
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {featuredProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="relative h-64 group">
+              <div className="relative h-64 group overflow-hidden">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-4 left-4 z-10">
                   <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                     {product.category}
                   </span>

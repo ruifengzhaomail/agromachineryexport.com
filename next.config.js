@@ -1,20 +1,14 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'images.unsplash.com',
-      'localhost'
-    ],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
       {
-        protocol: 'http', 
-        hostname: 'localhost',
-        port: '3001',
+        protocol: 'https',
+        hostname: 'picsum.photos',
       }
     ],
     formats: ['image/webp', 'image/avif'],

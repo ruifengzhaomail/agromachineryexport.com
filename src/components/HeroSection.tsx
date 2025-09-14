@@ -14,13 +14,13 @@ const slides = [
     title: 'Advanced Farming Solutions',
     subtitle: 'Precision Seeders & Planting Equipment', 
     description: 'State-of-the-art agricultural machinery designed to maximize efficiency and crop yields for modern farming operations.',
-    bgImage: '/images/hero/slide2.jpg'
+    bgImage: '/images/hero/slide1.jpg'
   },
   {
     title: 'Global Agricultural Partnership',
     subtitle: 'Reliable Equipment for Every Farm',
     description: 'From small family farms to large commercial operations, we provide the right machinery solutions for your agricultural needs.',
-    bgImage: '/images/hero/slide3.jpg'
+    bgImage: '/images/hero/slide1.jpg'
   }
 ];
 
@@ -32,8 +32,9 @@ export default function HeroSection() {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
+
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -53,7 +54,7 @@ export default function HeroSection() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full ${
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
@@ -63,7 +64,6 @@ export default function HeroSection() {
             backgroundRepeat: 'no-repeat'
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-50" />
         </div>
       ))}
 

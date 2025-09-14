@@ -38,8 +38,7 @@ export default function ProductsSection() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Products</h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Discover our range of high-quality agricultural machinery designed to improve 
-            farming efficiency and productivity.
+            Explore our comprehensive range of high-quality agricultural machinery designed to enhance your farming operations. From traditional tools to modern equipment, we have everything you need to boost productivity and efficiency.
           </p>
         </div>
 

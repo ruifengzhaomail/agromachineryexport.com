@@ -97,7 +97,6 @@ src/
 
 ## 📞 Contact Information
 
-- **Phone**: +86 187 0096 0103
 - **Email**: info@agromachineryexport.com
 - **Location**: Shanghai, China
 

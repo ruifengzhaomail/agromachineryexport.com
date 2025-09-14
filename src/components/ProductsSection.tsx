@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const featuredProducts = [
   {
     id: 1,
     category: "Seeders & Planters",
     name: "Multifunctional Precision Planter",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop&q=80",
+    image: "/images/products/seeder.jpg",
     price: "$12,000 - $18,000",
     description: "Advanced precision planting technology for efficient seeding with customizable row spacing and seed depth control.",
     features: ["GPS Navigation", "Variable Rate Seeding", "Auto Depth Control", "+1 more"]
@@ -14,7 +15,7 @@ const featuredProducts = [
     id: 2,
     category: "Tractors", 
     name: "Agricultural Tractor 85HP",
-    image: "https://images.unsplash.com/photo-1574859888790-a48dde04d2f6?w=600&h=400&fit=crop&q=80",
+    image: "/images/products/tractor.jpg",
     price: "$15,000 - $22,000",
     description: "Reliable and powerful tractor designed for various farming operations with excellent fuel efficiency.",
     features: ["85HP Engine", "4WD", "Hydraulic Lift", "+1 more"]
@@ -23,7 +24,7 @@ const featuredProducts = [
     id: 3,
     category: "Sprayers",
     name: "900 Knapsack Power Sprayer", 
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop&q=80",
+    image: "/images/products/sprayer.jpg",
     price: "$800 - $1,200",
     description: "Professional 4-stroke gasoline knapsack sprayer with 900 model designation. High-pressure system for efficient crop protection.",
     features: ["4-Stroke Engine", "High Pressure System", "Ergonomic Design", "Large Tank Capacity"]
@@ -54,7 +55,6 @@ export default function ProductsSection() {
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={product.id <= 3}
                 />
                 <div className="absolute top-4 left-4 z-10">
                   <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -82,15 +82,21 @@ export default function ProductsSection() {
                 </div>
                 
                 <div className="flex gap-3">
-                  <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                  <Link 
+                    href="/contact"
+                    className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors text-center"
+                  >
                     Request Quote
-                  </button>
-                  <button className="border border-red-500 text-red-500 hover:bg-red-50 py-2 px-4 rounded-lg font-medium transition-colors flex items-center">
+                  </Link>
+                  <Link 
+                    href="/products"
+                    className="border border-red-500 text-red-500 hover:bg-red-50 py-2 px-4 rounded-lg font-medium transition-colors flex items-center"
+                  >
                     Learn More
                     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -102,12 +108,12 @@ export default function ProductsSection() {
           <p className="text-gray-600 mb-6">
             Interested in our complete product catalog?
           </p>
-          <button 
-            onClick={() => window.location.href = '/products'}
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+          <Link 
+            href="/products"
+            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-block"
           >
             View All Products
-          </button>
+          </Link>
         </div>
       </div>
     </section>

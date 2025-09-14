@@ -1,126 +1,128 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { IMAGES } from '@/config/images'
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+
+const slides = [
+  {
+    image: 'https://images.unsplash.com/photo-1574859888790-a48dde04d2f6?w=1920&h=1080&fit=crop',
+    title: 'Professional Agricultural Machinery Export',
+    subtitle: 'Quality Tractors, Seeders & Farm Equipment from China',
+    description: '20+ years experience serving customers in Africa, Latin America, and Southeast Asia with factory-direct prices and reliable quality.'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&h=1080&fit=crop',
+    title: 'Advanced Farming Solutions',
+    subtitle: 'Precision Seeders & Planting Equipment',
+    description: 'State-of-the-art agricultural machinery designed to maximize efficiency and crop yields for modern farming operations.'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&h=1080&fit=crop',
+    title: 'Global Agricultural Partnership',
+    subtitle: 'Reliable Equipment for Every Farm',
+    description: 'From small family farms to large commercial operations, we provide the right machinery solutions for your agricultural needs.'
+  }
+];
 
 export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-
-  const slides = [
-    {
-      id: 1,
-      title: "Professional Agricultural Machinery Export",
-      subtitle: "Quality Tractors, Seeders & Farm Equipment from China",
-      description: "20+ years experience serving customers in Africa, Latin America, and Southeast Asia with factory-direct prices and reliable quality.",
-      image: IMAGES.hero.slide1,
-      cta: "View Products"
-    },
-    {
-      id: 2,
-      title: "Precision Planting Solutions",
-      subtitle: "Advanced Seeders & Planters for Modern Farming",
-      description: "Multifunctional precision planters designed for efficient seeding with customizable configurations to meet your farming needs.",
-      image: IMAGES.hero.slide2,
-      cta: "Learn More"
-    },
-    {
-      id: 3,
-      title: "OEM & Customization Services",
-      subtitle: "Tailored Agricultural Equipment Solutions",
-      description: "We provide OEM manufacturing and customization services to meet specific requirements for agricultural machinery worldwide.",
-      image: IMAGES.hero.slide3,
-      cta: "Get Quote"
-    }
-  ]
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [slides.length])
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   return (
-    <section className="relative h-[600px] overflow-hidden">
+    <section className="relative h-screen overflow-hidden">
+      {/* Slides */}
       {slides.map((slide, index) => (
         <div
-          key={slide.id}
+          key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${slide.image})`
-            }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-          </div>
-          
-          {/* Content */}
-          <div className="relative h-full flex items-center">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl">
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-                  {slide.title}
-                </h1>
-                <h2 className="text-xl md:text-2xl text-gray-200 mb-6">
-                  {slide.subtitle}
-                </h2>
-                <p className="text-lg text-gray-300 mb-8 max-w-2xl">
-                  {slide.description}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-red-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-red-600 transition-colors duration-200">
-                    {slide.cta}
-                  </button>
-                  <button className="border-2 border-white text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors duration-200">
-                    Contact Us
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            className="object-cover"
+            priority={index === 0}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50" />
         </div>
       ))}
 
+      {/* Content */}
+      <div className="relative z-10 flex items-center justify-center h-full">
+        <div className="text-center text-white px-4 max-w-4xl">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            {slides[currentSlide].title}
+          </h1>
+          <p className="text-xl md:text-2xl mb-4 text-gray-200">
+            {slides[currentSlide].subtitle}
+          </p>
+          <p className="text-lg mb-8 text-gray-300 max-w-3xl mx-auto">
+            {slides[currentSlide].description}
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+              View Products
+            </button>
+            <button className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+              Contact Us
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Navigation Arrows */}
-      <button
+      <button 
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all duration-200"
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20 text-white hover:text-red-400 transition-colors duration-300"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
       </button>
-      <button
+      
+      <button 
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all duration-200"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 text-white hover:text-red-400 transition-colors duration-300"
       >
-        <ChevronRight className="h-6 w-6" />
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
         {slides.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-200 ${
-              index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50'
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-white scale-125' : 'bg-white bg-opacity-50 hover:bg-opacity-75'
             }`}
           />
         ))}
       </div>
     </section>
-  )
+  );
 }

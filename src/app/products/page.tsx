@@ -1,109 +1,124 @@
-import Image from 'next/image';
+import { Metadata } from 'next'
 
-const featuredProducts = [
-  {
-    id: 1,
-    category: "Seeders & Planters",
-    name: "Multifunctional Precision Planter",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop",
-    price: "$12,000 - $18,000",
-    description: "Advanced precision planting technology for efficient seeding with customizable row spacing and seed depth control.",
-    features: ["GPS Navigation", "Variable Rate Seeding", "Auto Depth Control", "+1 more"]
+export const metadata: Metadata = {
+  title: 'Agricultural Machinery Products | Tractors, Planters & Farm Equipment Catalog',
+  description: 'Browse our complete range of agricultural machinery: tractors (45-120HP), precision planters, power sprayers, harvesters. Factory-direct prices, OEM customization available. Free shipping quotes to Africa, Latin America, Southeast Asia.',
+  keywords: ['agricultural tractors', 'farm equipment catalog', 'precision planters', 'crop sprayers', 'harvesting machinery', 'tractor prices', 'farm machinery China'],
+  openGraph: {
+    title: 'Agricultural Machinery Products Catalog',
+    description: 'Complete range of tractors, planters, and farm equipment',
+    url: 'https://www.agromachineryexport.com/products',
+    images: [{
+      url: '/images/products/tractor.jpg',
+      width: 1200,
+      height: 630,
+    }],
   },
-  {
-    id: 2,
-    category: "Tractors", 
-    name: "Agricultural Tractor 85HP",
-    image: "https://images.unsplash.com/photo-1574859888790-a48dde04d2f6?w=600&h=400&fit=crop",
-    price: "$15,000 - $22,000",
-    description: "Reliable and powerful tractor designed for various farming operations with excellent fuel efficiency.",
-    features: ["85HP Engine", "4WD", "Hydraulic Lift", "+1 more"]
-  },
-  {
-    id: 3,
-    category: "Sprayers",
-    name: "900 Knapsack Power Sprayer", 
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop",
-    price: "$800 - $1,200",
-    description: "Professional 4-stroke gasoline knapsack sprayer with 900 model designation. High-pressure system for efficient crop protection.",
-    features: ["4-Stroke Engine", "High Pressure System", "Ergonomic Design", "Large Tank Capacity"]
-  }
-];
+}
 
-export default function ProductsSection() {
+export default function ProductsPage() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Products</h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Explore our comprehensive range of high-quality agricultural machinery designed to enhance your farming operations. From traditional tools to modern equipment, we have everything you need to boost productivity and efficiency.
+    <div className="container mx-auto px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Agricultural Machinery Products",
+            "description": "Complete catalog of agricultural machinery including tractors, planters, and sprayers",
+            "url": "https://www.agromachineryexport.com/products"
+          })
+        }}
+      />
+
+      <h1 className="text-4xl font-bold mb-4">Our Products</h1>
+      <p className="text-xl text-gray-600 mb-12">
+        High-quality agricultural machinery for modern farming
+      </p>
+
+      <div className="grid md:grid-cols-3 gap-8">
+        <div className="border rounded-lg p-6 hover:shadow-lg transition">
+          <img 
+            src="/images/products/tractor.jpg" 
+            alt="Agricultural Tractor 85HP"
+            className="w-full h-48 object-cover rounded mb-4"
+          />
+          <h2 className="text-2xl font-bold mb-2">Agricultural Tractor 85HP</h2>
+          <p className="text-green-600 text-xl font-bold mb-3">$15,000 - $22,000</p>
+          <p className="text-gray-700 mb-4">
+            Reliable and powerful 85HP tractor designed for various farming operations with excellent fuel efficiency.
           </p>
+          <ul className="text-sm text-gray-600 mb-4 space-y-1">
+            <li>✓ Powerful 85HP diesel engine</li>
+            <li>✓ Four-wheel drive capability</li>
+            <li>✓ Air-conditioned cabin</li>
+            <li>✓ Low fuel consumption</li>
+          </ul>
+          <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+            Request Quote
+          </button>
         </div>
 
-        {/* Featured Products Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
-          {featuredProducts.map((product) => (
-            <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="relative h-64 group">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {product.category}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-red-500 text-lg font-bold mb-3">{product.price}</p>
-                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  {product.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {product.features.map((feature, index) => (
-                    <span 
-                      key={index}
-                      className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex gap-3">
-                  <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-medium transition-colors">
-                    Request Quote
-                  </button>
-                  <button className="border border-red-500 text-red-500 hover:bg-red-50 py-2 px-4 rounded-lg font-medium transition-colors flex items-center">
-                    Learn More
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="border rounded-lg p-6 hover:shadow-lg transition">
+          <img 
+            src="/images/products/seeder.jpg" 
+            alt="Multifunctional Precision Planter"
+            className="w-full h-48 object-cover rounded mb-4"
+          />
+          <h2 className="text-2xl font-bold mb-2">Precision Planter</h2>
+          <p className="text-green-600 text-xl font-bold mb-3">$12,000 - $18,000</p>
+          <p className="text-gray-700 mb-4">
+            Advanced precision planting technology for efficient seeding with customizable row spacing and seed depth control.
+          </p>
+          <ul className="text-sm text-gray-600 mb-4 space-y-1">
+            <li>✓ Precision seed placement</li>
+            <li>✓ Adjustable row spacing</li>
+            <li>✓ Variable seeding rate</li>
+            <li>✓ Works with multiple crop types</li>
+          </ul>
+          <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+            Request Quote
+          </button>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <p className="text-gray-600 mb-6">
-            Interested in our complete product catalog?
+        <div className="border rounded-lg p-6 hover:shadow-lg transition">
+          <img 
+            src="/images/products/knapsack-sprayer.png" 
+            alt="900 Knapsack Power Sprayer"
+            className="w-full h-48 object-cover rounded mb-4"
+          />
+          <h2 className="text-2xl font-bold mb-2">900 Power Sprayer</h2>
+          <p className="text-green-600 text-xl font-bold mb-3">$800 - $1,200</p>
+          <p className="text-gray-700 mb-4">
+            Professional 4-stroke gasoline knapsack sprayer. High-pressure system for efficient crop protection.
           </p>
-          <button className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-lg font-medium transition-colors">
-            View All Products
+          <ul className="text-sm text-gray-600 mb-4 space-y-1">
+            <li>✓ 4-stroke gasoline engine</li>
+            <li>✓ High-pressure spraying</li>
+            <li>✓ Large capacity tank</li>
+            <li>✓ Adjustable nozzle</li>
+          </ul>
+          <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+            Request Quote
           </button>
         </div>
       </div>
-    </section>
-  );
+
+      <div className="mt-16 bg-green-50 p-8 rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Need a Custom Solution?</h2>
+        <p className="text-gray-700 mb-4">
+          We offer OEM and customization services to meet your specific agricultural equipment requirements. Contact our team for personalized consultation.
+        </p>
+        <div className="flex gap-4">
+          <a href="tel:+8618700960103" className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">
+            Call: +86 187 0096 0103
+          </a>
+          <a href="mailto:info@agromachineryexport.com" className="border border-green-600 text-green-600 px-6 py-3 rounded hover:bg-green-50">
+            Email Us
+          </a>
+        </div>
+      </div>
+    </div>
+  )
 }
